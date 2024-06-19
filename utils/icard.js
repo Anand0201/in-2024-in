@@ -93,8 +93,7 @@ const generateIdCard = async (imageBuffer, strid, fullName, emailId, phone, form
   });
 
   const pdfBytes = await pdfDoc.save();
-  const outputPath = path.join(__dirname, 'public', 'icards', `${fullName}.pdf`);
-  fs.writeFileSync(outputPath, pdfBytes);
+  
 
   console.log('PDF created successfully');
 
