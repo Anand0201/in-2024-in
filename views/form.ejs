@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/form.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/submitRegistration" class="form" method="post">
+        <div class="form-card1">
+            <div class="form-card2">
+                <div class="formcard">
+                    <p class="form-heading">Personal Information</p>
+
+                    <div class="form-field">
+                        <input required="" placeholder="Name" name="full_name" class="input-field" type="text" />
+                    </div>
+
+                    <div class="form-field">
+                        <input required="" placeholder="Email" name="emailid" class="input-field" type="email" />
+                    </div>
+
+                    <div class="form-field">
+                        <input required="" placeholder="Phone" name="phone" class="input-field" type="tel" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-card1">
+            <div class="form-card2">
+                <div class="formcard">
+                    <p class="form-heading">Academic Information</p>
+
+                    <select name="Program" class="form-field" required>
+                        <option value="">Select Discipline</option>
+                        <option value="Degree">Degree</option>
+                        <option value="Diploma">Diploma</option>
+                    </select>
+                 
+                    <select name="semester" class="form-field" id="semester" required>
+                        <option value="">Select Semester</option>
+                        <option value="2nd">2nd Semester</option>
+                        <option value="4th">4th Semester</option>
+                        <option value="6th">6th Semester</option>
+                    </select>
+
+                    <div class="form-field">
+                        <input required="" placeholder="College Name" name="College" class="input-field" type="text" />
+                    </div>
+
+                    <select name="Program" class="form-field" required>
+                        <option value="">Select Program</option>
+                        <option value="14 Days Internship">Degree</option>
+                        <option value="30 Days Internship">Diploma</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-card1">
+            <div class="form-card2">
+                <div class="formcard">
+                    <p class="form-heading">Upload</p>
+
+                    <h6>Screenshot</h6>
+                    <div class="form-field">
+                        <input required="" placeholder="upload transaction screenshot" name="screenshot" class="input-field" type="file" />
+                    </div>
+
+                    <h6>passport</h6>
+                    <div class="form-field">
+                        <input required="" placeholder="upload Personal passport" name="passport" class="input-field" type="file" />
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="formcard">
+                    <button class="sendMessage-btn" type="submit">Submit</button>
+                </div>
+    </form>
+</body>
+</html>
