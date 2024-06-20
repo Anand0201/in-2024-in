@@ -1,91 +1,84 @@
-<!DOCTYPE html>
-<!-- ctrl + / = comments -->
-<!-- <!DOCTYPE html>  : tells browser about the version of html -->
-<html lang="en">
-<!-- <html lang="en">, the lang attribute is set to "en", indicating that the primary language of the document is English -->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up Form</title>
+        <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/coding_club_registeration.css" />
+    </head>
+    <body>
+      <div class="row">
+    <div class="col-md-12">
+      <form action="index.html" method="post">
+        <h1> OTE Internship Registration </h1>
+        
+        <fieldset>
+          
+          <legend><span class="number">1</span> Personal Information</legend>
 
-<head>
-  <meta charset="UTF-8" />
-  <!-- <meta />
-            tag is used to provide metadata about the HTML document,
-            <meta charset="UTF-8" />
-            specifies the character encoding for the document, indicating that the text in
-            the document is encoded using UTF-8.  Unicode Transformation Format, 8-bit -->
-  <!-- Metadata refers to data that provides information about other data. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- The
-    <meta />
-    tag with the name="viewport" attribute is commonly used in web development
-    to control the layout and scaling of the webpage on different devices,
-    particularly on mobile devices. -->
-  <link rel="stylesheet" href="css/coding_club_registeration.css" />
-  <title>OTE-Internship Registration</title>
-</head>
-<!-- It's a container for metadata and other information about the document that isn't directly visible on the webpage itself. -->
+          <label for="name">Full Name:</label>
+          <input type="text" name="full_name" id="full_name" required />
 
-<body>
-  <div class="container">
-    <form action="/submitRegistration" method="post" enctype="multipart/form-data">
-      <!-- The <div> element in HTML is a generic container used to divide or section off parts of an HTML document.  -->
-      <h2>OTE Internship Registration</h2>
-      <div class="section">
-        <h3>Personal Information:</h3>
-        <input type="text" name="full_name" id="full_name" placeholder="Full Name" required />
-        <input type="email" name="emailid" id="emailid" placeholder="Email Address" required />
-        <input type="tel" name="phone" id="phone" placeholder="Phone Number" required />
-      </div>
-      <div class="section">
-        <h3>Academic Information:</h3>
-        <select name="discipline" id="Program" required>
-          <option value="">Select Discipline</option>
-          <option value="Degree">Degree</option>
-          <option value="Diploma">Diploma</option>
+          <label for="name">Email:</label>
+        <input type="email" name="emailid" id="emailid" required />
+
+        <label for="name">Phone Number:</label>
+        <input type="tel" name="phone" id="phone" required />
+
+<!--         
+          <label>Age:</label>
+          <input type="radio" id="under_13" value="under_13" name="user_age"><label for="under_13" class="light">Under 13</label><br>
+          <input type="radio" id="over_13" value="over_13" name="user_age"><label for="over_13" class="light">Over 13</label> -->
+          
+        </fieldset>
+        <fieldset>  
+        
+          <legend><span class="number">2</span> Academic Information</legend>
+        
+          <select name="discipline" id="Program" required>
+            <option value="">Select Discipline</option>
+            <option value="Degree">Degree</option>
+            <option value="Diploma">Diploma</option>
+          </select>
+          <!-- select is used for dropdown list, option represents options of dropdown  -->
+          <select name="semester" id="semester" required>
+            <option value="">Select Semester</option>
+            <option value="2nd">2nd Semester</option>
+            <option value="4th">4th Semester</option>
+            <option value="6th">6th Semester</option>
+          </select>
+          <input type="text" name="College" id="College" placeholder="College Name" required />
+          <select name="Program" class="form-field" required>
+            <option value="">Select Program</option>
+            <option value="14 Days Internship">14 Days Internship</option>
+            <option value="30 Days Internship">30 Days Internship</option>
         </select>
-        <!-- select is used for dropdown list, option represents options of dropdown  -->
-        <select name="semester" id="semester" required>
-          <option value="">Select Semester</option>
-          <option value="2nd">2nd Semester</option>
-          <option value="4th">4th Semester</option>
-          <option value="6th">6th Semester</option>
-        </select>
-        <input type="text" name="College" id="College" placeholder="College Name" required />
-        <select name="Program" class="form-field" required>
-          <option value="">Select Program</option>
-          <option value="14 Days Internship">14 Days Internship</option>
-          <option value="30 Days Internship">30 Days Internship</option>
-      </select>
+
+        <legend><span class="number">2</span> Transaction Validation Proof</legend>
+
+          <h3>Transaction Screenshot</h3>
+          <p>*recommended to show transaction Id to upload screenshot</p>
+          <input type="file" name="screenshot" id="screenshot">
+  
+          <h3>Upload PassPort Size Photo</h3>
+          <input type="file" name="passport" id="passport">
+
+
+
+        
+           <div class="section">
+            <h3>Join our WhatsApp for further updates.</h3>
+            <p>Have you joined the WhatsApp channel ? (highly recommended to join WhatsApp channel)<a href="https://chat.whatsapp.com/G1wijHJMSgjFalCgRF83SM">Link</a></p>
+            <span><input type="radio" name="yes" id="yes">Yes</span>
+          </div>
+          
+         </fieldset>
+       
+        <button type="submit">Sign Up</button>
+        
+       </form>
+        </div>
       </div>
       
-      <div class="section">
-        <h3>Transaction Screenshot</h3>
-        <p>recommended to show transaction Id to upload screenshot</p>
-        <input type="file" name="screenshot" id="screenshot">
-      </div>
-
-      <div class="section">
-        <h3>Upload PassPort Size Photo</h3>
-        <input type="file" name="passport" id="passport">
-      </div>
-
-      <div class="section">
-        <h3>join our WhatsApp for further updates.</h3>
-        <p>have you joined the WhatsApp channel ? (highly recommended to join WhatsApp channel)<a href="https://chat.whatsapp.com/G1wijHJMSgjFalCgRF83SM">Link</a></p>
-        <span><input type="radio" name="yes" id="yes">Yes</span>
-      </div>
-      
-      <button type="submit" onclick="showpopup()" >Submit</button>
-    </form>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    function showpopup() {
-      swal.fire({
-        title: "Congratulations",
-        text: "You have registered successfully!",
-        icon: "success"
-      });
-    }
-  </script>
-</body>
-
+    </body>
 </html>
