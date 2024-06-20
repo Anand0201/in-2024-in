@@ -2,6 +2,7 @@ const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 const fs = require('fs');
 const sharp = require('sharp');
 const path = require('path');
+const admin = require('firebase-admin'); // Ensure this is available in your icard.js
 
 const capitalizeFirstLetter2 = (str) => {
   return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -92,11 +93,20 @@ const generateIdCard = async (imageBuffer, strid, fullName, emailId, phone, form
   });
 
   const pdfBytes = await pdfDoc.save();
-  const outputPath = path.join(__dirname, 'public', 'icards', `${fullName}.pdf`);
-  fs.writeFileSync(outputPath, pdfBytes);
+  
 
   console.log('PDF created successfully');
-  return outputPath;
+
+  // Upload to Firebase Storage
+  const bucket = admin.storage().bucket();
+  const icardUpload = bucket.file(`Icards/${fullName}/${fullName}.pdf`);
+  await icardUpload.save(pdfBytes);
+  const icardURL = await icardUpload.getSignedUrl({
+    action: 'read',
+    expires: '03-01-2500'
+  });
+
+  return icardURL[0]; // Return the URL of the uploaded ID card
 };
 
 module.exports = { generateIdCard };

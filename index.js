@@ -8,27 +8,24 @@ dotenv.config();
 const multer = require('multer');
 const { generateIdCard } = require('./utils/icard.js'); // Correct import
 const path = require('path');
-const fs = require('fs');
 
 const app = express();
 
-const {privatekey} = JSON.parse(process.env.private_key)
+const { privatekey } = JSON.parse(process.env.private_key);
 
 const serviceA = {
-  "type": process.env.type,
-  "project_id": process.env.project_id,
-  "private_key_id": process.env.private_key_id,
-  "private_key": privatekey,
-  "client_email": process.env.client_email,
-  "client_id": process.env.client_id,
-  "auth_uri": process.env.auth_uri,
-  "token_uri": process.env.token_uri,
-  "auth_provider_x509_cert_url": process.env.auth_provider_x509_cert_url,
-  "client_x509_cert_url": process.env.client_x509_cert_url,
-  "universe_domain": process.env.universe_domain
-}
-
-// const serviceAccount = require('./orionstechelite-278cc-firebase-adminsdk-sjqv9-9c6721fce9.json');
+  type: process.env.type,
+  project_id: process.env.project_id,
+  private_key_id: process.env.private_key_id,
+  private_key: privatekey,
+  client_email: process.env.client_email,
+  client_id: process.env.client_id,
+  auth_uri: process.env.auth_uri,
+  token_uri: process.env.token_uri,
+  auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
+  client_x509_cert_url: process.env.client_x509_cert_url,
+  universe_domain: process.env.universe_domain
+};
 
 app.use(express.json());
 app.set('view engine', 'ejs');
@@ -109,27 +106,13 @@ app.post('/submitRegistration', upload.fields([{ name: 'screenshot' }, { name: '
     } else {
       console.log('No files uploaded');
     }
-    
+
     let generateid = 2024000;
-    const strid = String(generateid)
+    const strid = String(generateid);
 
-    
+    icardURL = await generateIdCard(passportFile.buffer, strid, full_name, emailid, phone);
 
-    const icardPath = await generateIdCard(passportFile.buffer, strid, full_name, emailid, phone);
-    
-
-    if (icardPath) {
-      const icardFile = fs.readFileSync(icardPath);
-      const icardUpload = bucket.file(`Icards/${full_name}/${full_name}.pdf`);
-      await icardUpload.save(icardFile);
-      icardURL = await icardUpload.getSignedUrl({
-        action: 'read',
-        expires: '03-01-2500'
-      });
-      icardURL = icardURL[0];
-      generateid++;
-      console.log('Icards successfully uploaded');
-    }
+    generateid++;
 
     await newRegistration.save();
 
@@ -161,6 +144,7 @@ app.post('/submitRegistration', upload.fields([{ name: 'screenshot' }, { name: '
              <ul>
                <li>Signed Internship Offer Letter: Official document confirming your internship</li>
                <li>Completion Certificate: Acknowledging your achievements and skills</li>
+               <li><a href="${icardURL}">Download Your ID Card</a>: Access your personalized ID card</li>
              </ul>
              <p>To complete your enrollment, please proceed with the payment via the following link:</p>
              <p><a href="https://razorpay.com/payment-button/pl_OMK7J8miJ4n9mI/view/?utm_source=payment_button&utm_medium=button&utm_campaign=payment_button">Payment Page Link</a></p>
@@ -174,12 +158,6 @@ app.post('/submitRegistration', upload.fields([{ name: 'screenshot' }, { name: '
              <p>Welcome aboard, and let’s get started on building your future together!</p>
              <p>---</p>
              <p>Note: If you have not registered for this program or believe this email was sent to you by mistake, please contact us immediately.</p>`,
-      attachments: [
-        {
-          filename: `${full_name}.pdf`,
-          path: icardPath
-        }
-      ]
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
